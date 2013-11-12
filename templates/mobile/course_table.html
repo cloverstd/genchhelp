@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+课表
+{% end %}
+
+{% block content %}
+{% set week = ["monday", "tuesday", "wednesday", "thursday", "friday"] %}
+{% set week_cn = ["一", "二", "三", "四", "五"] %}
+
+{% for i_week in range(5) %}
+<div data-role="page" id="{{ week[i_week] }}">
+    <div data-role="header" data-position="fixed">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>星期{{ week_cn[i_week] }}</h1>
+        <div data-role="navbar">
+            <ul>
+                <!--
+                <li><a href="#monday" data-transition="slide" class="ui-btn-active ui-state-persist">一</a></li>
+                <li><a href="#tuesday" data-transition="slide">二</a></li>
+                <li><a href="#wednesday" data-transition="slide">三</a></li>
+                <li><a href="#thursday" data-transition="slide">四</a></li>
+                <li><a href="#friday" data-transition="slide">五</a></li>
+                -->
+                {% for z in range(5) %}
+                    {% if z == i_week %}
+                    <li><a href="#{{ week[z] }}" data-transition="slide" class="ui-btn-active ui-state-persist">{{ week_cn[z] }}</a></li>
+                    {% else %}
+                    <li><a href="#{{ week[z] }}" data-transition="slide">{{ week_cn[z] }}</a></li>
+                    {% end %}
+
+                {% end %}
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d">
+            {% set course = courses[i_week] %}
+            {% for i in range(0, 16, 2) %}
+            {% if i == 0 %}
+            <li data-role="list-divider" data-theme="e">上午</li>
+            {% elif i == 4 %}
+            <li data-role="list-divider" data-theme="e">下午</li>
+            {% end %}
+            {% if course[i] and course[i+1] %}
+                <li data-theme="d">
+                <h1>{{ course[i]["name"] }}</h1>
+                <p>{{ course[i]["teacher"] }}</p>
+                <p class="ui-li-count">{{ course[i]["room"] }}<p>
+                </li>
+            {% elif course[i] %}
+                <li data-theme="d">
+                <h1>{{ course[i]["name"] }} (半)</h1>
+                <p>{{ course[i]["teacher"] }}</p>
+                <p class="ui-li-count">{{ course[i]["room"] }}<p>
+                </li>
+            {% else %}
+            <li data-theme="c">
+                <h1>&nbsp;</h1>
+                <p>&nbsp;<p>
+            </li>
+            {% end %}
+            {% end %}
+        </ul>
+    </div>
+</div>
+
+{% end %}
+
+{% end %}

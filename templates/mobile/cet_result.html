@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+大学四六级考试成绩
+{% end %}
+{% block content %}
+<div data-role="page">
+    <div data-role="header">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>四六级考试成绩</h1>
+    </div>
+    <div data-role="content">
+        {% if result["error"] %}
+        <p>暂无成绩</p>
+        {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>类型</th>
+                    <th>总分</th>
+                    <th>听力</th>
+                    <th>阅读</th>
+                    <th>综合</th>
+                    <th>写作与翻译</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ result["name"] }}</td>
+                    <td>{{ result["type"] }}</td>
+                    <td>{{ result["total"] }}</td>
+                    <td>{{ result["listen"] }}</td>
+                    <td>{{ result["read"] }}</td>
+                    <td>{{ result["com"] }}</td>
+                    <td>{{ result["write"] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        {% end %}
+    </div>
+</div>
+{% end %}

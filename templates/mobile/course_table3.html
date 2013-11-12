@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}
+课表
+{% end %}
+
+{% block content %}
+<div data-role="page" id="monday">
+    <div data-role="header" data-position="fixed">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>星期一</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#monday" data-transition="slide" class="ui-btn-active ui-state-persist">一</a></li>
+                <li><a href="#tuesday" data-transition="slide">二</a></li>
+                <li><a href="#wednesday" data-transition="slide">三</a></li>
+                <li><a href="#thursday" data-transition="slide">四</a></li>
+                <li><a href="#friday" data-transition="slide">五</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d">
+            <li data-role="list-divider" data-theme="e">上午</li>
+
+            <li data-theme="c">
+                <h3>&nbsp;</h3>
+                <p>&nbsp;</p>
+            </li>
+
+            <li data-theme="d">
+                <h3>Java程序设计</h3>
+                <p>朱丽娟</p>
+                <p class="ui-li-count">1559</p>
+            </li>
+
+            <li data-role="list-divider" data-theme="e">下午</li>
+
+            <li data-theme="d">
+                <h3>网页设计</h3>
+                <p>矫桂娥</p>
+                <p class="ui-li-count">1573</p>
+            </li>
+
+            <li data-theme="c">
+                <h3>&nbsp;</h3>
+                <p>&nbsp;</p>
+            </li>
+
+            <li data-theme="d">
+                <h3>中华民俗常识</h3>
+                <p>李剑恩</p>
+                <p class="ui-li-count">2108</p>
+            </li>
+
+            <li data-theme="c">
+                <h3>&nbsp;</h3>
+                <p>&nbsp;</p>
+            </li>
+            <li data-theme="c">
+                <h3>&nbsp;</h3>
+                <p>&nbsp;</p>
+            </li>
+            <li data-theme="c">
+                <h3>&nbsp;</h3>
+                <p>&nbsp;</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% end %}

@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+
+{% block title %}
+课表
+{% end %}
+
+{% block content %}
+<div data-role="page" id="monday">
+    <div data-role="header" data-position="fixed">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>星期一</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#monday" data-transition="slide" class="ui-btn-active ui-state-persist">一</a></li>
+                <li><a href="#tuesday" data-transition="slide">二</a></li>
+                <li><a href="#wednesday" data-transition="slide">三</a></li>
+                <li><a href="#thursday" data-transition="slide">四</a></li>
+                <li><a href="#friday" data-transition="slide">五</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d">
+            <li data-role="list-divider" data-theme="e"><h1>上午</h1></li>
+            <li data-role="list-divider">
+            8:00-8:45
+            第一节
+                <span class="ui-li-count">1314</span>
+            </li>
+            <li>
+            <span class="course-name">计算机网络原理</span>
+                <span class="ui-li-count course-teacher">苏庆刚</span>
+            </li>
+            <li data-role="list-divider">
+            8:45-9:30
+            第二节
+                <span class="ui-li-count">1314</span>
+            </li>
+            <li>
+            <span class="course-name">计算机网络原理</span>
+                <span class="ui-li-count course-teacher">苏庆刚</span>
+            </li>
+            <li data-role="list-divider">
+            9:50-10:35
+            第三节
+                <span class="ui-li-count">1314</span>
+            </li>
+            <li>
+            <span class="course-name">计算机网络原理</span>
+                <span class="ui-li-count course-teacher">苏庆刚</span>
+            </li>
+            <li data-role="list-divider">
+            10:35-11:20
+            第四节
+                <span class="ui-li-count">1314</span>
+            </li>
+            <li>
+            <span class="course-name">计算机网络原理</span>
+                <span class="ui-li-count course-teacher">苏庆刚</span>
+            </li>
+            <li data-role="list-divider" data-theme="e"><h1>下午</h1></li>
+            <li data-role="list-divider">
+            13:00-13:45
+            第五节
+                <span class="ui-li-count">1314</span>
+            </li>
+            <li>
+            <span class="course-name">计算机网络原理</span>
+                <span class="ui-li-count course-teacher">苏庆刚</span>
+            </li>
+            <li data-role="list-divider">
+            13:45-14:30
+            第六节
+            </li>
+            <li>
+            </li>
+            <li data-role="list-divider">
+            14:50-15:35
+            第七节
+                <span class="ui-li-count">1314</span>
+            </li>
+            <li>
+            <span class="course-name">计算机网络原理</span>
+                <span class="ui-li-count course-teacher">苏庆刚</span>
+            </li>
+            <li data-role="list-divider">
+            15:35-16:20
+            第八节
+                <span class="ui-li-count">1314</span>
+            </li>
+            <li>
+            <span class="course-name">计算机网络原理</span>
+                <span class="ui-li-count course-teacher">苏庆刚</span>
+            </li>
+            <li data-role="list-divider" data-theme="e"><h1>晚上</h1></li>
+            <li data-role="list-divider">
+            17:10-17:55
+            第九节
+            </li>
+            <li>
+            <li data-role="list-divider">
+            17:55-18:40
+            第十节
+            </li>
+            <li>
+            <li data-role="list-divider">
+            第十一节
+            </li>
+            <li>
+            <li data-role="list-divider">
+            第十二节
+            </li>
+            <li>
+            <li data-role="list-divider">
+            第十三节
+            </li>
+            <li>
+            <li data-role="list-divider">
+            第十四节
+            </li>
+            <li>
+            <li data-role="list-divider">
+            第十五节
+            </li>
+            <li>
+            <li data-role="list-divider">
+            第十六节
+            </li>
+            <li>
+        </ul>
+    </div>
+</div>
+
+{% end %}

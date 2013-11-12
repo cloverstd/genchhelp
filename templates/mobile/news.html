@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{{ page_title }}
+{% end %}
+
+{% block content %}
+<div data-role="page" id="aboutPage">
+<script>
+    /*$("#aboutPage").live("pageinit", function() {*/
+        /*$(".news").live("click", function() {*/
+            /*$("#goto-news").attr("href", $(this).data("href"));*/
+            /*$.mobile.changePage("#prompt");*/
+        /*});*/
+    /*});*/
+</script>
+    <div data-role="header" data-position="fixed">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>{{ page_title }}</h1>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview">
+            <li data-role="list-divider" data-theme="e">下列链接将会跳出本站，可能会消耗较多流量</li>
+            {% for new in news %}
+            <li><a class="news" href="{{ new['href'] }}">{{ new['title'] }}</a></li>
+            {% end %}
+        </ul>
+    </div>
+</div>
+{% end %}

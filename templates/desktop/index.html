@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form action="/" method="POST">
+        <label for="username">学号</label>
+        <input id="username" type="text" name="username">
+        <label for="password">密码</label>
+        <input id="password" type="password" name="password">
+        {% module xsrf_form_html() %}
+        <button>登录</button>
+    </form>
+</body>
+</html>

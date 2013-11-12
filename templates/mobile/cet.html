@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+大学四六级考试查询
+{% end %}
+{% block content %}
+<div data-role="page">
+    <div data-role="header" data-position="fixed">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>四六级考试查询</h1>
+    </div>
+    <div data-role="content">
+        <form action="/user/cet" method="POST">
+            <div data-role="fieldcontain">
+                <label for="number">准考证号</label>
+                <input type="number" name="number" id="number" />
+            </div>
+            <div data-role="fieldcontain">
+                <label for="name">姓名（最多三个字）</label>
+                <input type="text" name="name" id="name" maxlength="3"/>
+            </div>
+            {% module xsrf_form_html() %}
+            <div data-role="fieldcontain" >
+                <div style="margin-left: auto; margin-right: auto; width: 100%; text-align: center;">
+                <button type="submit" data-inline="true">查询</button>
+                <button type="reset" data-theme="a" data-inline="true">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% end %}

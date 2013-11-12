@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+打卡查询
+{% end %}
+
+{% block content %}
+<div data-role="page" id="my-daka">
+    <div data-role="header">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>打卡查询</h1>
+    </div>
+    <div data-role="content">
+        <form action="/user/daka" method="POST" id="daka-form">
+            <div style="width: 7em; margin: 0 auto; font-weight: bold; font-size: 1.5em;">请选择你的生日</div>
+            <div data-role="fieldcontain">
+                <input type="date" name="birthday" id="birthday" value="1993-07-13"/>
+            </div>
+            <div data-role="fieldcontain">
+                <a href="#" data-role="button">查询</a>
+            </div>
+            {% module xsrf_form_html() %}
+        </form>
+    </div>
+</div>
+{% end %}

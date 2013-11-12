@@ -1,0 +1,163 @@
+{% extends "layout.html" %}
+{% block title %}大建桥助手{% end %}
+
+{% block header %}
+<h1>大建桥助手</h1>
+{% end %}
+
+{% block content %}
+<!-- 主要 page -->
+<div data-role="page" id="index">
+
+    <div data-role="header" data-position="fixed">
+        <h1>大建桥助手</h1>
+    </div>
+
+    <div data-role="content">
+        <ul data-role="listview" data-dividertheme="b" style="margin-top: 0;">
+            <li data-role="list-divider">操作</li>
+            {% if current_user %}
+            <li><a href="/user">用户中心</a></li>
+            {% else %}
+            <li><a href="#login-page" data-rel="dialog">登录<span class="ui-li-count">登录后才可查询</span></a></li>
+            {% end %}
+            <li data-role="list-divider">帮助</li>
+            <li><a href="#explain-page" data-rel="dialog">说明</a></li>
+            <li><a href="#about-page" data-rel="dialog">关于</a></li>
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <h6>Copyright ©2013</h6>
+        <!--
+        <h6>Design by <a href="http://weibo.com/cloverstd" data-rel="external">@cloverstd</a></h6>
+        -->
+    </div>
+
+
+</div>
+
+<!-- 关于 dialog page -->
+<div data-role="page" id="about-page">
+    <div data-role="header">
+        <a href="#index" data-icon="home">返回</a>
+        <h1>关于</h1>
+    </div>
+
+    <div data-role="content">
+        <p>大建桥生活学习助手，在这里你可以查课表、成绩、打卡次数。</p>
+    </div>
+
+    <div data-role="footer">
+        <h1></h1>
+    </div>
+</div>
+
+
+<!-- 说明 dialog page -->
+<div data-role="page" id="explain-page">
+    <div data-role="header">
+        <a href="#index" data-icon="home">返回</a>
+        <h1>说明</h1>
+    </div>
+
+    <div data-role="content">
+        <ul data-role="listview" data-dividertheme="b" style="margin-top: 0;">
+            <li data-role="list-divider">这是什么玩意儿</li>
+            <li>大建桥生活学习助手，在这里你可以查课表、成绩、打卡次数。</li>
+            <li data-role="list-divider">为什么会有这个东西</li>
+            <li>因为教务系统没有手机版。打卡查询网址是IP地址太难记了。</li>
+            <!--
+            <li data-role="list-divider">隐私问题</li>
+            <li>这个玩意儿是为了方便我大建桥学子所做的对于教务系统的扩展插件，因为教务系统不能提供类似与新浪微博一样的Oauth认证方式，
+            所以只能学号密码登录，为了方便大家查询，本系统会把学号密码加密后储存，我们会尽量保证隐私安全问题。</li>
+            -->
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <h1></h1>
+    </div>
+</div>
+
+<!-- 登录 dialog page -->
+<div data-role="page" id="login-page">
+    <div data-role="header">
+        <a href="#index" data-icon="home">返回</a>
+        <h1>登录</h1>
+    </div>
+
+    <div data-role="content">
+            <form action="/api/login" method="POST" id="login-form">
+        <ul data-role="listview" data-dividertheme="b" style="margin-top: 0;">
+            <li id="error" style="display:none;"></li>
+            <li data-role="list-divider"><label for="username">学号<span class="ui-li-count">教务系统学号</span></label></li>
+            <li><input type="text" placeholder="学号" name="username" id="username" data-clear-btn="true"></li>
+            <li data-role="list-divider"><label for="password">密码<span class="ui-li-count">教务系统密码</span></label></li>
+            <li><input type="password" placeholder="默认密码身份证后6位"name="password" id="password" data-clear-btn="true"></li>
+            <li>
+            <input type="checkbox" name="autologin" id="autologin" value="1">
+            <label for="autologin">下次自动登录</label>
+            </li>
+            <li><a href="#" id="login">登录</a></li>
+        </ul>
+            {% module xsrf_form_html() %}
+            </form>
+    </div>
+
+    <div data-role="footer">
+        <h1></h1>
+    </div>
+</div>
+<script>
+    $(function() {
+        var login = function() {
+            var school_num = $("#username").val();
+            var password = $("#password").val();
+            if (school_num == "") {
+                $("#error").text("学号不能为空");
+                $("#error").fadeIn();
+            } else if (password == "") {
+                $("#error").text("密码不能为空");
+                $("#error").fadeIn();
+            } else {
+                $.mobile.loading( "show", {
+                    text: "登录ing",
+                    textVisible: true,
+                    theme: "a",
+                    html: ""
+                });
+                $.post("/login", $("#login-form").serialize(), function(){
+                console.log("test")
+                }).done(function(data) {
+                    if (data.status == false) {
+                        $("#error").text(data.err_msg);
+                        $("#error").fadeIn();
+                    } else {
+                        window.location.href = "/user"
+                    }
+                }).fail(function(data) {
+                    console.log("fail" + data);
+                    $("#error").text("超时，请重试");
+                    $("#error").fadeIn();
+                }).always(function() {
+                    $.mobile.loading('hide');
+                });
+            }
+        };
+        $("#login").click(function() {
+            login();
+        });
+        $("input").focus(function() {
+            $("#error").fadeOut(function() {
+                $("#error").text("");
+            });
+        });
+        $("input").keypress(function(event){
+            if (event.which == 13) {
+                login();
+            }
+        });
+    });
+</script>
+{% end %}

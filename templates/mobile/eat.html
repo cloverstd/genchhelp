@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div data-role="page">
+    <div data-role="header" data-position="fixed">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>建桥零食铺子</h1>
+    </div>
+    <div data-role="content">
+        <div data-role="collapsible-set" data-theme="b" data-content-theme="d" data-inset="false">
+            <div data-role="collapsible" data-theme="e">
+                <h2>说明</h2>
+                <ul data-role="listview">
+                    <li>本店15元起送</li>
+                    <li>派送至男生寝室，女生寝室楼下</li>
+                    <li>营业时间：20:00-22:00</li>
+                </ul>
+            </div>
+            <div data-role="collapsible">
+                <h2>饮料</h2>
+                <ul data-role="listview">
+                    <li>冰红茶<span class="ui-li-count">￥3.00/瓶</span></li>
+                    <li>绿茶<span class="ui-li-count">￥3.00</span></li>
+                    <li>奶茶<span class="ui-li-count">￥5.00</span></li>
+                    <li>冰糖雪梨<span class="ui-li-count">￥3.00</span></li>
+                </ul>
+            </div>
+            <div data-role="collapsible" >
+                <h2>零食</h2>
+                <ul data-role="listview" data-theme="d" data-divider-theme="d">
+                    <li>乐事<span class="ui-li-count">￥9.50/桶</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+成绩
+{% end %}
+
+{% block content %}
+
+<!-- 主要 page -->
+<div data-role="page">
+    <div data-role="header" data-position="fixed">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>我的成绩</h1>
+    </div>
+
+    <div data-role="content">
+        {{ grade }}
+    </div>
+
+</div>
+
+<script>
+    $(function() {
+    });
+</script>
+{% end %}

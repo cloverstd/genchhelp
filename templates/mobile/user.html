@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block title %}大建桥助手{% end %}
+
+{% block header %}
+<h1>用户中心-大建桥助手</h1>
+{% end %}
+
+{% block content %}
+{% set week = ["monday", "tuesday", "wednesday", "thursday", "friday"] %}
+<!-- 主要 page -->
+<div data-role="page">
+    <div data-role="header">
+        <h1>用户中心</h1>
+        <a href="/logout" class="ui-btn-right" id="logout">登出</a>
+    </div>
+
+    <div data-role="content data-title="用户中心">
+        <ul data-role="listview" data-dividertheme="b" style="margin-top: 0;">
+            <li data-role="list-divider">信息<span class="ui-li-count">查询信息</span></a>
+            <li><a href="/user/coursetable#{{ week[week_now] }}" data-prefetch="true" data-ajax="false">我的课表</a></li>
+            <li><a href="/user/grade" data-rel="external">我的成绩</a></li>
+            <li><a href="/user/cet" data-rel="external">四六级查询<span class="ui-li-count">最近一次</span></a></li>
+            <!--
+            <li><a href="/user/daka" data-rel="external">我的打卡</a></li>
+            --!>
+            <li data-role="list-divider">新闻<span class="ui-li-count">大建桥首页新闻</span></a>
+            <li><a href="/user/main_news" data-rel="external">建桥要闻</a></li>
+            <li><a href="/user/public_news" data-rel="external">信息公开</a></li>
+            <!--
+            <li data-role="list-divider">失物招领<span class="ui-li-count">丢东西找东西啦</span></a>
+            <li><a href="#" data-rel="external">失物榜</a></li>
+            <li><a href="#" data-rel="external">招领榜</a></li>
+            <li data-role="list-divider">吃在建桥<span class="ui-li-count">外卖信息</span></a>
+            <li><a href="#" data-rel="external">零食铺子</a></li>
+            <li><a href="#" data-rel="external">外卖信息</a></li>
+            --!>
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <h6>Copyright ©2013</h6>
+            <!--
+        <h6>Design by <a href="http://weibo.com/cloverstd" data-rel="external">@cloverstd</a></h6>
+            --!>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $("#logout").click(function() {
+            $.get("/logout", function() {
+                $.mobile.loading( "show");
+            }).always(function(data) {
+                window.location.href = "/";
+            });
+        });
+    });
+</script>
+{% end %}
