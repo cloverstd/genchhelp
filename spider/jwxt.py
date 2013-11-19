@@ -7,7 +7,6 @@ import json
 import requests
 import functools
 import redis
-import sys
 from BeautifulSoup import BeautifulSoup
 try:
     import cPickle as pickle
@@ -292,7 +291,7 @@ class JWXT(object):
         """
         semester: "2012-2011"
         """
-        #self.login()
+        self.login()
         semester_id = Semester()[semester][int(term)]
         data = dict(
                     semesterId=semester_id)
@@ -313,10 +312,21 @@ class JWXT(object):
         grade = walk_table(soup.table)
         return grade
 
+    def get_credit(self, semester, term=0):
+        self.login()
 
+        semester_id = Semester()[semester][term]
+        data = {"semester.id": semester_id}
+        req = self.session.post(self.credit_url, data=data)
 
-#if __name__ == '__main__':
-    #jwxt = JWXT()
-    #jwxt.set_user('1121276', "wsaw2931336")
-    #content = jwxt.login()
-    #print content
+        soup = BeautifulSoup(req.text)
+
+        def walk_table(table):
+            return filter(lambda x: bool(x), [[col.text for col in row.findAll('td')]
+                    for row in table.findAll('tr')])
+        rv = walk_table(soup.table)[1:]
+
+        table1 = [(rv[0][i+1], rv[1][i]) for i in range(len(rv[1]))]
+        table2 = filter(lambda x: bool(x!=(u'',u'')), [(rv[2][i+1], rv[3][i]) for i in range(len(rv[3]))])
+
+        return table1 + table2
