@@ -7,6 +7,8 @@ import json
 import requests
 import functools
 import redis
+import sys
+from BeautifulSoup import BeautifulSoup
 try:
     import cPickle as pickle
 except ImportError:
@@ -17,11 +19,13 @@ try:
 except ImportError:
     import sha
     sha1 = sha.new
-
+#sys.path.append(os.path.dirname(__name__))
+from lib.semester import Semester
 BASE_URL = "http://jwxt.gench.edu.cn/eams/"
 LOGIN_URL = "login.action"
 COURSE_URL = "courseTableForStd!courseTable.action"
 GRADE_URL = "teach/grade/course/person!historyCourseGrade.action"
+GRADE_ONE_URL = "teach/grade/course/person!search.action"
 
 _redis_cache = redis.StrictRedis()
 
@@ -61,6 +65,7 @@ class JWXT(object):
         self.course_url = self.base_url + COURSE_URL
         self.ids_url = self.base_url + "courseTableForStd.action"
         self.grade_url = self.base_url + GRADE_URL
+        self.grade_one_url = self.base_url + GRADE_ONE_URL
 
         self.headers = {
                 'Referer': self.base_url,
@@ -240,16 +245,74 @@ class JWXT(object):
 
         return course_table
 
+    #@cache
+    #def get_grade(self):
+        #"""V1"""
+        #self.login()
+        #data = dict(projectType="MAJOR")
+
+        #key = re.compile(ur'<table.*<\/table>', re.S)
+        #req = self.session.post(self.grade_url, data=data)
+        #rv = re.findall(key, req.text)
+
+        #return rv[0]
+
     @cache
-    def get_grade(self):
+    def get_grade(self, raw=True):
+        """
+        V2
+        GDP: 学年度 学期 门数 总学分 平均绩点
+        grade: 学年和学期 课程代码 课程序号 课程名称 课程类别 学分 最终成绩 绩点
+        """
         self.login()
         data = dict(projectType="MAJOR")
 
-        key = re.compile(ur'<table.*<\/table>', re.S)
         req = self.session.post(self.grade_url, data=data)
-        rv = re.findall(key, req.text)
 
-        return rv[0]
+        if raw:
+
+            key = re.compile(ur'<table.*<\/table>', re.S)
+            rv = re.findall(key, req.text)
+            return rv[0]
+
+        soup = BeautifulSoup(req.text)
+        table = soup.findAll("table")
+
+        def walk_table(table):
+            return filter(lambda x: bool(x), [[col.text for col in row.findAll('td')]
+                    for row in table.findAll('tr')])
+
+        GDP = walk_table(table[0])
+        grade = walk_table(table[1])
+        return GDP, grade
+
+
+    @cache
+    def get_grade_by_semester(self, semester, term=0, raw=True):
+        """
+        semester: "2012-2011"
+        """
+        #self.login()
+        semester_id = Semester()[semester][int(term)]
+        data = dict(
+                    semesterId=semester_id)
+
+        req = self.session.post(self.grade_one_url, data=data)
+        if raw:
+
+            key = re.compile(ur'<table.*<\/table>', re.S)
+            rv = re.findall(key, req.text)
+            return rv[0]
+
+            # JUST FOR API
+        soup = BeautifulSoup(req.text)
+        def walk_table(table):
+            return filter(lambda x: bool(x), [[col.text for col in row.findAll('td')]
+                    for row in table.findAll('tr')])
+
+        grade = walk_table(soup.table)
+        return grade
+
 
 
 #if __name__ == '__main__':
