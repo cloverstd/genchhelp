@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+打卡情况
+{% end %}
+
+{% block content %}
+<div data-role="page" id="my-daka">
+    <div data-role="header">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>打卡情况</h1>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-theme="d" data-divider-theme="e">
+            <li data-role="list-divider">打卡统计</li>
+            <li>{{ count[0][0][:-1] }}<p class="ui-li-count">{{ count[0][1] }}</p></li>
+            <li>{{ count[0][2][:-1] }}<p class="ui-li-count">{{ count[0][3] }}</p></li>
+            <li>{{ count[0][4][:-1] }}<p class="ui-li-count">{{ count[0][5] }}</p></li>
+            <li data-role="list-divider">具体情况</li>
+            {% for i in info %}
+            <li>{{ i[3] }}<p class="ui-li-count">{{ i[-2] }}</p></li>
+            {% end %}
+        </ul>
+    </div>
+</div>
+{% end %}

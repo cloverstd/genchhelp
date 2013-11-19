@@ -14,10 +14,10 @@
         <form action="/user/daka" method="POST" id="daka-form">
             <div style="width: 7em; margin: 0 auto; font-weight: bold; font-size: 1.5em;">请选择你的生日</div>
             <div data-role="fieldcontain">
-                <input type="date" name="birthday" id="birthday" value="1993-07-13"/>
+                <input type="date" name="birthday" id="birthday" value="1996-02-04"/>
             </div>
             <div data-role="fieldcontain">
-                <a href="#" data-role="button">查询</a>
+                <button type="submit">查询</button>
             </div>
             {% module xsrf_form_html() %}
         </form>
