@@ -222,5 +222,7 @@ class CreditHandler(BaseHandler):
         template_values = dict()
         template_values["credit_base"] = credit_base
         template_values["credit_reward"] = credit_reward
+        template_values["semester"] = semester
+        template_values["term"] = term
 
         self.render("mobile/credit_result.html", **template_values)

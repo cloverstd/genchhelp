@@ -12,6 +12,7 @@
     </div>
     <div data-role="content">
         <ul data-role="listview" data-theme="d" data-divider-theme="e">
+            <li data-role="list-divider"  data-theme="b" style="text-align: center;"><h1>{{ semester }}第{{ int(term)+1 }}学期</h1></li>
             <li data-role="list-divider">基础学分</li>
             {% for i in credit_base %}
             <li>{{ i[0]}}<p class="ui-li-count">{{ i[1] }}</p></li>
