@@ -51,12 +51,12 @@ class Sport(object):
 
         rv = req.text.encode("utf-8")
 
-        return bool(rv.find(self.username) != -1)
+        return bool(rv.find("补刷卡")!=-1 and rv.find("早操")!=-1)
 
     def get_score(self):
-        req = self.session.get(self.url_score)
+        req = self.session.get(self.url_score.decode("utf-8"))
 
-        soup = BeautifulSoup(req.text)
+        soup = BeautifulSoup(req.content)
 
         count_table = soup.findAll("table")[11]
         info_table = soup.findAll("table")[14]
