@@ -11,6 +11,7 @@ from spider.news import get_main_news, get_public_news
 from tornado.web import authenticated
 from lib.session import Session
 from spider.cet import get_last_cet_score
+from spider.sport import Sport
 
 class IndexHandler(BaseHandler):
 
@@ -101,12 +102,21 @@ class GradeHandler(BaseHandler):
     @Session
     def get(self):
 
+        semester = self.get_argument("s", None)
+        term = self.get_argument("t", None)
+
+        if term and semester:
+            gench = self.session["gench"]
+            grade = gench.get_grade_by_semester(semester, term, raw=False)
+            return self.write("%r" % grade)
+
         gench = self.session["gench"]
         grade = gench.get_grade()
         template_values = dict()
         template_values["grade"] = grade
 
         self.render("mobile/grades.html", **template_values)
+
 
 
 class DakaHandler(BaseHandler):
@@ -120,9 +130,28 @@ class DakaHandler(BaseHandler):
     @Session
     def post(self):
         birthday = self.get_argument("birthday")
-        print birthday
+        template_values = dict()
+        template_values["error"] = False
+        try:
+            birthday = "".join(birthday.split('-'))
+        except:
+            template_values["error"] = True
+            template_values["error_msg"] = "生日输入错误"
+            return self.render("mobile/daka_result.html", **template_values)
 
-        self.write("%s" % birthday)
+        gench = self.session["gench"]
+        number = int(gench.school_num)
+        sport = Sport(number, birthday)
+        if not sport.login():
+            template_values["error"] = True
+            template_values["error_msg"] = "生日错误，请重试"
+            return self.render("mobile/daka_result.html", **template_values)
+
+        count, info = sport.get_score()
+
+        template_values["count"] = count
+        template_values["info"] = info
+        self.render("mobile/daka_result.html", **template_values)
 
 
 class MainNewsHandler(BaseHandler):
@@ -170,3 +199,28 @@ class EatHandler(BaseHandler):
     def get(self):
 
         self.render("mobile/eat.html")
+
+
+class CreditHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+
+        self.render("mobile/credit.html")
+
+    @authenticated
+    @Session
+    def post(self):
+
+        semester = self.get_argument("semester")
+
+        semester, term = semester.split(":")[0], semester.split(":")[1]
+
+        gench = self.session["gench"]
+
+        credit_base, credit_reward = gench.get_credit(semester, int(term))
+        template_values = dict()
+        template_values["credit_base"] = credit_base
+        template_values["credit_reward"] = credit_reward
+
+        self.render("mobile/credit_result.html", **template_values)

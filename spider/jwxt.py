@@ -25,6 +25,7 @@ LOGIN_URL = "login.action"
 COURSE_URL = "courseTableForStd!courseTable.action"
 GRADE_URL = "teach/grade/course/person!historyCourseGrade.action"
 GRADE_ONE_URL = "teach/grade/course/person!search.action"
+CREDIT_URL = "stdSearchCreait!search.action"
 
 _redis_cache = redis.StrictRedis()
 
@@ -65,6 +66,7 @@ class JWXT(object):
         self.ids_url = self.base_url + "courseTableForStd.action"
         self.grade_url = self.base_url + GRADE_URL
         self.grade_one_url = self.base_url + GRADE_ONE_URL
+        self.credit_url = self.base_url + CREDIT_URL
 
         self.headers = {
                 'Referer': self.base_url,
@@ -329,4 +331,4 @@ class JWXT(object):
         table1 = [(rv[0][i+1], rv[1][i]) for i in range(len(rv[1]))]
         table2 = filter(lambda x: bool(x!=(u'',u'')), [(rv[2][i+1], rv[3][i]) for i in range(len(rv[3]))])
 
-        return table1 + table2
+        return table1, table2

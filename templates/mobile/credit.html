@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+素质拓展学分查询
+{% end %}
+
+{% block content %}
+<div data-role="page" id="my-daka">
+    <div data-role="header">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>素质拓展学分</h1>
+    </div>
+    <div data-role="content">
+        <form action="/user/credit" method="POST">
+            <div data-role="fieldcontain">
+                <select name="semester">
+                    <option value="2011-2012:0">2011-2012第一学期</option>
+                    <option value="2011-2012:1">2011-2012第二学期</option>
+                    <option value="2012-2013:0">2012-2013第一学期</option>
+                    <option value="2012-2013:1">2012-2013第二学期</option>
+                    <option value="2013-2014:0">2013-2014第一学期</option>
+                    <option value="2013-2014:1">2013-2014第二学期</option>
+                </select>
+            </div>
+            {% module xsrf_form_html() %}
+            <div data-role="fieldcontain">
+                <button type="submit" data-theme="b">查询</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% end %}
