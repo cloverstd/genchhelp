@@ -8,6 +8,7 @@ url = "http://211.80.112.212/Default.aspx"
 url_score = "http://211.80.112.212/stScore.aspx"
 URL_BASE = "http://211.80.112.212/"
 from BeautifulSoup import BeautifulSoup
+from lib import cache
 
 class Sport(object):
 
@@ -28,7 +29,7 @@ class Sport(object):
         req = requests.get(self.URL_BASE)
         return bool(req.status_code == requests.codes.ok)
 
-    #@cache.Common(expires=7200)
+    @cache.CommonCache(expires=7200)
     def _get_viewstate(self):
 
         req = requests.get(self.URL_BASE)
