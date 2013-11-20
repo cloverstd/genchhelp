@@ -2,7 +2,7 @@
 
 
 import requests
-from lib.proxy import get_proxy
+#from lib.proxy import get_proxy
 from BeautifulSoup import BeautifulSoup
 import re
 
@@ -21,8 +21,8 @@ def get_last_cet_score(zkzh, xm):
             "Referer": "http://www.chsi.com.cn/cet/",
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.114 Safari/537.36",
             }
-    proxies = {"http": get_proxy()}
-    req = requests.get("%s?zkzh=%s&xm=%s" % (url, zkzh, xm), headers=headers, proxies=proxies)
+    #proxies = {"http": get_proxy()}
+    req = requests.get("%s?zkzh=%s&xm=%s" % (url, zkzh, xm), headers=headers)#, proxies=proxies)
 
     soup = BeautifulSoup(req.text)
 
@@ -47,3 +47,7 @@ def get_last_cet_score(zkzh, xm):
         result['error'] = True
 
     return result
+
+#msg =  get_last_cet_score("310370131108107", "杨逸")
+#for key in msg.keys():
+    #print msg[key]
