@@ -14,8 +14,10 @@ routes = list()
 
 #routes.append((r'/laf/lost.json', laf.GetLostHandler))
 
-from handlers import mobile, api
+from handlers import mobile, api, desktop
 
+
+# Mobile
 routes.append((r'/', mobile.IndexHandler))
 routes.append((r'/login', mobile.LoginHandler))
 routes.append((r'/logout', mobile.LogoutHandler))
@@ -28,6 +30,14 @@ routes.append((r'/user/public_news', mobile.PublicNewsHandler))
 routes.append((r'/user/cet', mobile.CETHandler))
 routes.append((r'/user/eat', mobile.EatHandler))
 routes.append((r'/user/credit', mobile.CreditHandler))
+
+# Desktop
+routes.append((r'/d', desktop.IndexHandler))
+routes.append((r'/d/', desktop.IndexHandler))
+routes.append((r'/d/cet', desktop.CETHandler))
+routes.append((r'/d/sport', desktop.DakaHandler))
+routes.append((r'/d/comment', desktop.CommentHandler))
+routes.append((r'/d/about', desktop.AboutHandler))
 
 # API
 routes.append((r'/api/login', api.LoginHandler))

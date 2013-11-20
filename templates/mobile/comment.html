@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+留言
+{% end %}
+
+{% block content %}
+<div data-role="page" id="my-daka">
+    <div data-role="header">
+        <a href="/user" data-rel="external" data-icon="home">返回</a>
+        <h1>留言</h1>
+    </div>
+    <div data-role="content">
+    <!-- Duoshuo Comment BEGIN -->
+    <div class="ds-thread"></div>
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:"{{ duoshuo }}"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = 'http://static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+    <!-- Duoshuo Comment END -->
+    </div>
+</div>
+{% end %}

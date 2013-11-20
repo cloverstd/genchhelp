@@ -11,6 +11,9 @@
         <h1>打卡情况</h1>
     </div>
     <div data-role="content">
+        {% if error %}
+        <p>{{ error_msg }}</p>
+        {% else %}
         <ul data-role="listview" data-theme="d" data-divider-theme="e">
             <li data-role="list-divider">打卡统计</li>
             <li>{{ count[0][0][:-1] }}<p class="ui-li-count">{{ count[0][1] }}</p></li>
@@ -21,6 +24,7 @@
             <li>{{ i[3] }}<p class="ui-li-count">{{ i[-2] }}</p></li>
             {% end %}
         </ul>
+        {% end %}
     </div>
 </div>
 {% end %}

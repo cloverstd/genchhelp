@@ -1,0 +1,109 @@
+
+{% extends "layout.html" %}
+
+{% block title %}四六级成绩查询{% end %}
+
+{% block content %}
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+        <a class="brand" href="/">大建桥助手</a>
+        <ul class="nav">
+        <li><a href="/d">首页</a></li>
+        <li class="active"><a href="#">四六级查询</a></li>
+        <li><a href="/d/sport">打卡查询</a></li>
+        <li><a href="/d/about">关于</a></li>
+        <li><a href="/d/comment">留言</a></li>
+        </ul>
+        </div>
+  </div>
+</div>
+
+<div class="container">
+    <center>
+    <h1>四六级成绩查询</h1>
+    <hr/>
+    </center>
+    <div class="row">
+
+        <div class="span12">
+        <div class="row">
+        <div class="span4 offset4">
+        <div class="alert alert-info">
+
+        <form action="/d/cet" method="POST">
+            <div class="alert alert-warming">
+                {% if result["error"] %}
+                暂无成绩，可能是输入错误
+                {% else %}
+                    姓名最多只能输入三个
+                {% end %}
+            </div>
+        <center>
+        <div class="control-group">
+    <div class="controls">
+        <input type="number" id="number" placeholder="准考证号" name="number" required >
+            </div>
+    </div>
+
+        <div class="control-group">
+    <div class="controls">
+        <input type="text" id="name" placeholder="姓名" maxlength="3" name="name" required >
+            </div>
+    </div>
+        {% module xsrf_form_html() %}
+
+        <div class="control-group">
+    <div class="controls">
+        <button type="submit" class="btn btn-primary">查询</button>
+        <button type="reset" class="btn btn-inverse">重置</button>
+            </div>
+    </div>
+        </center>
+        </form>
+
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="span12">
+            <div class="row">
+                <div class="span10 offset1">
+                    {% if not result["error"] %}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>学校</th>
+                                <th>类型</th>
+                                <th>准考证号</th>
+                                <th>时间</th>
+                                <th>总分</th>
+                                <th>听力</th>
+                                <th>阅读</th>
+                                <th>综合</th>
+                                <th>写作与翻译</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td>{{ result["name" ]}}</td>
+                            <td>{{ result["school" ]}}</td>
+                            <td>{{ result["type" ]}}</td>
+                            <td>{{ result["number" ]}}</td>
+                            <td>{{ result["time" ]}}</td>
+                            <td>{{ result["total" ]}}</td>
+                            <td>{{ result["listen" ]}}</td>
+                            <td>{{ result["read" ]}}</td>
+                            <td>{{ result["com" ]}}</td>
+                            <td>{{ result["write" ]}}</td>
+                        </tbody>
+                    </table>
+                    {% end %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% end %}

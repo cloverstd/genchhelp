@@ -1,0 +1,128 @@
+
+{% extends "layout.html" %}
+
+{% block title %}打卡查询{% end %}
+
+{% block content %}
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+        <a class="brand" href="/">大建桥助手</a>
+        <ul class="nav">
+        <li><a href="/d">首页</a></li>
+        <li><a href="/d/cet">四六级查询</a></li>
+        <li class="active"><a href="#">打卡查询</a></li>
+        <li><a href="/d/about">关于</a></li>
+        <li><a href="/d/comment">留言</a></li>
+        </ul>
+        </div>
+  </div>
+</div>
+
+<div class="container">
+    <center>
+    <h1>打卡查询</h1>
+    <hr/>
+    </center>
+    <div class="row">
+
+        <div class="span4 offset4">
+        <div class="alert alert-info">
+
+        <form action="/d/sport" method="POST">
+
+                {% if error %}
+            <div class="alert alert-error">
+                学号或者生日不正确
+            </div>
+                {% else %}
+            <div class="alert alert-warming">
+                密码是生日，生日形式为：19960204
+            </div>
+                {% end %}
+        <center>
+        <div class="control-group">
+    <div class="controls">
+        <input type="number" placeholder="学号" name="number" required >
+            </div>
+    </div>
+
+        <div class="control-group">
+    <div class="controls">
+        <input type="number" placeholder="生日" maxlength="8" name="birthday" required >
+            </div>
+    </div>
+        {% module xsrf_form_html() %}
+
+        <div class="control-group">
+    <div class="controls">
+        <button type="submit" class="btn btn-primary">查询</button>
+        <button type="reset" class="btn btn-inverse">重置</button>
+            </div>
+    </div>
+        </center>
+        </form>
+
+        </div>
+        </div>
+        </div>
+        <div class="span12">
+            <div class="row">
+                <div class="span8 offset2">
+                    {% if not error %}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="3"><h2 class="text-center">打卡统计</h2></th>
+                            </tr>
+                            <tr>
+                                <th>{{ count[0][0][:-1]}}</th>
+                                <th>{{ count[0][2][:-1]}}</th>
+                                <th>{{ count[0][4][:-1]}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ count[0][1] }}</td>
+                                <td>{{ count[0][3] }}</td>
+                                <td>{{ count[0][5] }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span8 offset2">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="4"><h2 class="text-center">具体情况</h2></th>
+                            </tr>
+                            <tr>
+                                <th>项目名称</th>
+                                <th>项目类型</th>
+                                <th>考勤时间</th>
+                                <th>判断</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in info %}
+                            <tr>
+                                <td>{{ i[1] }}</td>
+                                <td>{{ i[2] }}</td>
+                                <td>{{ i[3] }}</td>
+                                <td>{{ i[4] }}</td>
+                            </tr>
+                            {% end %}
+                        </tbody>
+                    </table>
+                    {% end %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% end %}

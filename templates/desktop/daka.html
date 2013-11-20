@@ -1,0 +1,65 @@
+
+{% extends "layout.html" %}
+
+{% block title %}打卡查询{% end %}
+
+{% block content %}
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+        <a class="brand" href="/">大建桥助手</a>
+        <ul class="nav">
+        <li><a href="/d">首页</a></li>
+        <li><a href="/d/cet">四六级查询</a></li>
+        <li class="active"><a href="#">打卡查询</a></li>
+        <li><a href="/d/about">关于</a></li>
+        <li><a href="/d/comment">留言</a></li>
+        </ul>
+        </div>
+  </div>
+</div>
+
+<div class="container">
+    <center>
+    <h1>打卡查询</h1>
+    <hr/>
+    </center>
+    <div class="row">
+
+        <div class="span4 offset4">
+        <div class="alert alert-info">
+
+        <form action="/d/sport" method="POST">
+
+            <div class="alert alert-warming">
+                密码是生日，生日形式为：19960204
+            </div>
+        <center>
+        <div class="control-group">
+    <div class="controls">
+        <input type="number" placeholder="学号" name="number" required >
+            </div>
+    </div>
+
+        <div class="control-group">
+    <div class="controls">
+        <input type="number" placeholder="生日" maxlength="8" name="birthday" required >
+            </div>
+    </div>
+        {% module xsrf_form_html() %}
+
+        <div class="control-group">
+    <div class="controls">
+        <button type="submit" class="btn btn-primary">查询</button>
+        <button type="reset" class="btn btn-inverse">重置</button>
+            </div>
+    </div>
+        </center>
+        </form>
+
+        </div>
+        </div>
+    </div>
+</div>
+
+{% end %}

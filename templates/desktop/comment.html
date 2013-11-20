@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}留言{% end %}
+
+{% block content %}
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+        <a class="brand" href="/">大建桥助手</a>
+        <ul class="nav">
+        <li><a href="/">首页</a></li>
+        <li><a href="/d/cet">四六级查询</a></li>
+        <li><a href="/d/sport">打卡查询</a></li>
+        <li><a href="/d/about">关于</a></li>
+        <li class="active"><a href="#">留言</a></li>
+        </ul>
+        </div>
+  </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="span10 offset1">
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"{{ duoshuo }}"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+        </div>
+    </div>
+</div>
+
+{% end %}

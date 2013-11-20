@@ -1,17 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    <form action="/" method="POST">
-        <label for="username">学号</label>
-        <input id="username" type="text" name="username">
-        <label for="password">密码</label>
-        <input id="password" type="password" name="password">
-        {% module xsrf_form_html() %}
-        <button>登录</button>
-    </form>
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}大建桥{% end %}
+
+{% block content %}
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+        <a class="brand" href="/">大建桥助手</a>
+        <ul class="nav">
+        <li class="active"><a href="#">首页</a></li>
+        <li><a href="/d/cet">四六级查询</a></li>
+        <li><a href="/d/sport">打卡查询</a></li>
+        <li><a href="/d/about">关于</a></li>
+        <li><a href="/d/comment">留言</a></li>
+        </ul>
+        </div>
+  </div>
+</div>
+
+<div class="container">
+    <div class="hero-unit">
+        <h2>为了更方便的校园生活</h2>
+        <p>大建桥助手是为了方便上海建桥学院的童鞋在手机端访问教务系统查看成绩、课表、素质拓展学分等的小助手。</p>
+        <p><a href="/d/about" class="btn btn-primary btn-large">更多&raquo;</a></p>
+    </div>
+
+    <div class="row">
+        <div class="span4">
+            <div class="alert alert-info">
+            <h3>四六级查询</h3>
+            <p>可以方便的查询四六级考试成绩</p>
+            <p><a class="btn" href="/d/cet">去试试 &raquo;</a></p>
+            </div>
+        </div>
+
+        <div class="span4">
+            <div class="alert alert-info">
+            <h3>打卡查询</h3>
+            <p>还在寻找查询打卡次数的网站吗？这里就可以查询坑爹打卡次数</p>
+            <p><a class="btn" href="/d/sport">去试试 &raquo;</a></p>
+            </div>
+        </div>
+
+        <div class="span4">
+            <div class="alert alert-info">
+            <h3>更多功能</h3>
+            <p>更多功能请使用手机访问本站，本站初衷就是为了手机而建立</p>
+            <p>手机版：<a href="http://ooxx.hui.lu">http://ooxx.hui.lu</a></p>
+            <p><a href="#myModal" role="button" class="btn" data-toggle="modal">手机扫描二维码获取地址</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">手机访问本站</h3>
+  </div>
+  <div class="modal-body text-center">
+    <p><img src="/static/desktop/img/QRcode.png" class="img-polaroid"></p>
+    <p>推荐使用微信、易信、来往等工具扫描</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+{% end %}

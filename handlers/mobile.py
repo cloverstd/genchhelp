@@ -16,6 +16,7 @@ from lib.ua import DesktopOnly
 
 class IndexHandler(BaseHandler):
 
+    @DesktopOnly
     def get(self):
 
         self.render("mobile/index.html")
