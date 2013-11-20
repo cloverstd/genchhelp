@@ -13,11 +13,11 @@
         <form action="/user/cet" method="POST">
             <div data-role="fieldcontain">
                 <label for="number">准考证号</label>
-                <input type="number" name="number" id="number" />
+                <input type="number" name="number" id="number" data-clear-btn="true"/>
             </div>
             <div data-role="fieldcontain">
                 <label for="name">姓名（最多三个字）</label>
-                <input type="text" name="name" id="name" maxlength="3"/>
+                <input type="text" name="name" id="name" maxlength="3" data-clear-btn="true"/>
             </div>
             {% module xsrf_form_html() %}
             <div data-role="fieldcontain" >

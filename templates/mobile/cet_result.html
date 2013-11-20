@@ -13,30 +13,18 @@
         {% if result["error"] %}
         <p>暂无成绩</p>
         {% else %}
-        <table>
-            <thead>
-                <tr>
-                    <th>姓名</th>
-                    <th>类型</th>
-                    <th>总分</th>
-                    <th>听力</th>
-                    <th>阅读</th>
-                    <th>综合</th>
-                    <th>写作与翻译</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ result["name"] }}</td>
-                    <td>{{ result["type"] }}</td>
-                    <td>{{ result["total"] }}</td>
-                    <td>{{ result["listen"] }}</td>
-                    <td>{{ result["read"] }}</td>
-                    <td>{{ result["com"] }}</td>
-                    <td>{{ result["write"] }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <ul data-role="listview" data-theme="d" data-divider-theme="e">
+            <li data-role="list-divider">考生</li>
+            <li><h3>姓名<h3><p class="ui-li-count">{{ result["name"] }}</p></li>
+            <li><h3>学校<h3><p class="ui-li-count">{{ result["school"] }}</p></li>
+            <li><h3>类型<h3><p class="ui-li-count">{{ result["type"] }}</p></li>
+            <li data-role="list-divider">分数</li>
+            <li><h3>总分<h3><p class="ui-li-count">{{ result["total"] }}</p></li>
+            <li><h3>听力<h3><p class="ui-li-count">{{ result["listen"] }}</p></li>
+            <li><h3>阅读<h3><p class="ui-li-count">{{ result["read"] }}</p></li>
+            <li><h3>综合<h3><p class="ui-li-count">{{ result["com"] }}</p></li>
+            <li><h3>写作与翻译<h3><p class="ui-li-count">{{ result["write"] }}</p></li>
+        </ul>
         {% end %}
     </div>
 </div>
