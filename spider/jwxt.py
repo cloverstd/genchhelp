@@ -36,24 +36,26 @@ def _compute_key(function, *args, **kwargs):
 def _prefix(key):
     return "Cache: %s" % key
 
-def cache(func):
-    @functools.wraps(func)
-    def wraps(self, *args, **kwargs):
-        key = _compute_key(func, self.school_num, *args, **kwargs)
-        if _redis_cache.exists(_prefix(key)):
-            return pickle.loads(_redis_cache.get(_prefix(key)))
+def cache(expires=86400): # 24 * 60 * 60 # 1 day
+    def _cache(func):
+        @functools.wraps(func)
+        def wraps(self, *args, **kwargs):
+            key = _compute_key(func, self.school_num, *args, **kwargs)
+            if _redis_cache.exists(_prefix(key)):
+                return pickle.loads(_redis_cache.get(_prefix(key)))
 
-        result = func(self, *args, **kwargs)
+            result = func(self, *args, **kwargs)
 
-        pickled = pickle.dumps(result)
-        pipe = _redis_cache.pipeline()
-        pipe.set(_prefix(key), pickled)
-        pipe.expire(_prefix(key), 86400) # 24 * 60 * 60 # 1 day
-        pipe.execute()
+            pickled = pickle.dumps(result)
+            pipe = _redis_cache.pipeline()
+            pipe.set(_prefix(key), pickled)
+            pipe.expire(_prefix(key), expires)
+            pipe.execute()
 
-        return result
+            return result
 
-    return wraps
+        return wraps
+    return _cache
 
 
 class JWXT(object):
@@ -116,7 +118,7 @@ class JWXT(object):
     def _get_html(self, url):
         return self.session.get(url).text
 
-    @cache
+    @cache()
     def get_course(self):
         """
         semester.id 说明
@@ -258,7 +260,7 @@ class JWXT(object):
 
         #return rv[0]
 
-    @cache
+    @cache(expires=7200)
     def get_grade(self, raw=True):
         """
         V2
@@ -288,7 +290,7 @@ class JWXT(object):
         return GDP, grade
 
 
-    @cache
+    @cache(expires=7200)
     def get_grade_by_semester(self, semester, term=0, raw=True):
         """
         semester: "2012-2011"
@@ -314,6 +316,7 @@ class JWXT(object):
         grade = walk_table(soup.table)
         return grade
 
+    @cache(expires=7200)
     def get_credit(self, semester, term=0):
         self.login()
 
