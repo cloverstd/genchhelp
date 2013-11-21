@@ -13,6 +13,7 @@ from lib.session import Session
 from spider.cet import get_last_cet_score
 from spider.sport import Sport
 from lib.ua import DesktopOnly
+from lib import util
 
 class IndexHandler(BaseHandler):
 
@@ -241,5 +242,6 @@ class CreditHandler(BaseHandler):
         template_values["credit_reward"] = credit_reward
         template_values["semester"] = semester
         template_values["term"] = term
+        template_values["cal_credit"] = util.cal_credit
 
         self.render("mobile/credit_result.html", **template_values)

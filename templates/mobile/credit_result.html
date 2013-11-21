@@ -9,15 +9,26 @@
     <div data-role="header">
         <a href="/user" data-rel="external" data-icon="home">返回</a>
         <h1>素质拓展学分</h1>
+        <a href="/user/credit" data-ajax="false" data-icon="back" data-iconpos="right">继续查询</a>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-theme="d" data-divider-theme="e">
-            <li data-role="list-divider"  data-theme="b" style="text-align: center;"><h1>{{ semester }}第{{ int(term)+1 }}学期</h1></li>
-            <li data-role="list-divider">基础学分</li>
+            <li data-role="list-divider"  data-theme="b" style="text-align: center;">
+            {% set credit_base_total = cal_credit(credit_base) %}
+            {% set credit_reward_total = cal_credit(credit_reward) %}
+            <h1>{{ semester }}第{{ int(term)+1 }}学期</h1>
+            <p class="ui-li-count">{{ credit_reward_total + credit_base_total}}</p>
+            </li>
+            <li data-role="list-divider">基础学分
+            <p class="ui-li-count">{{ credit_base_total }}</p>
+            </li>
             {% for i in credit_base %}
             <li>{{ i[0]}}<p class="ui-li-count">{{ i[1] }}</p></li>
             {% end %}
-            <li data-role="list-divider">奖励学分</li>
+            <li data-role="list-divider">奖励学分
+            <p class="ui-li-count">
+            {{ credit_reward_total }}
+            </p></li>
             {% for i in credit_reward %}
             <li>{{ i[0]}}<p class="ui-li-count">{{ i[1] }}</p></li>
             {% end %}
