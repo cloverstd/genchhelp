@@ -3,3 +3,4 @@ test
 dump.rdb
 *.tar.gz
 fabfile.py
+*vps.conf
