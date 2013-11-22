@@ -31,3 +31,7 @@ class BaseHandler(tornado.web.RequestHandler):
             self.redirect("/#login-page", permanent=True)
 
         self.write("%r%s" % (kwargs, status_code))
+
+    def check_xsrf_cookie(self):
+        if not self.request.path.startswith("/api"):
+            tornado.web.RequestHandler.check_xsrf_cookie(self)
