@@ -30,7 +30,6 @@ class CETHandler(BaseHandler):
 
         number = self.get_argument("number", None)
         name = self.get_argument("name", None)
-        print number, name
 
         template_values = dict()
         template_values["result"] = get_last_cet_score(number, name)
