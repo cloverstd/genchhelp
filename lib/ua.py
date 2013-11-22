@@ -8,7 +8,7 @@ def DesktopOnly(func):
     def wraps(self, *args, **kwargs):
 
         ua = self.request.headers["User-Agent"]
-        if ua.find("X11; Windows NT") != -1 or\
+        if ua.find("Windows NT") != -1 or\
             ua.find("X11; Linux x86_64") != -1 or \
             ua.find("Macintosh") != -1:
             print "Desktop"
