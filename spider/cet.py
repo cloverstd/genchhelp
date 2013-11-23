@@ -47,7 +47,3 @@ def get_last_cet_score(zkzh, xm):
         result['error'] = True
 
     return result
-
-#msg =  get_last_cet_score("310370131108107", "杨逸")
-#for key in msg.keys():
-    #print msg[key]

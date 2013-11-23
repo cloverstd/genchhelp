@@ -42,6 +42,10 @@ routes.append((r'/d/about', desktop.AboutHandler))
 # API
 routes.append((r'/api/login', api.LoginHandler))
 routes.append((r'/api/logout', api.LogoutHandler))
-routes.append((r'/api/course_table', api.CourseTableHandler))
-routes.append((r'/api/cet', api.CETHandler))
-routes.append((r'/api/test', api.TESTHandler))
+routes.append((r'/api/course', api.CourseHandler))  # 课表
+routes.append((r'/api/grade/(\d{4})/(\d{4})/([12])', api.GradeHandler))  # 成绩
+routes.append((r'/api/daka/(\d+)/(\d{8})', api.DakaHandler))  # 打卡
+routes.append((r'/api/credit/(\d{4})/(\d{4})/([12])', api.CreditHandler))  # 素质拓展
+routes.append((r'/api/cet', api.CETHandler))  # 四六级
+routes.append((r'/api/news/main', api.MainNewsHandler))  # 建桥要闻
+routes.append((r'/api/news/public', api.PublicNewsHandler))  # 信息公开

@@ -18,7 +18,8 @@ class Sport(object):
         self.url_login = self.URL_BASE + "Default.aspx"
 
         #self.url_login = "http://211.80.112.212/Default.aspx"
-        self.url_score = "http://211.80.112.212/stScore.aspx?item=1"
+        #self.url_score = "http://211.80.112.212/stScore.aspx?item=1"
+        self.url_score = self.URL_BASE + "stScore.aspx?item=1"
 
         self.username = str(username)
         self.password = str(password)
