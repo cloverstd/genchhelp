@@ -4,6 +4,7 @@
 import tornado.web
 import json
 from lib.session import Session
+import config
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -35,3 +36,10 @@ class BaseHandler(tornado.web.RequestHandler):
     def check_xsrf_cookie(self):
         if not self.request.path.startswith("/api"):
             tornado.web.RequestHandler.check_xsrf_cookie(self)
+
+    def render(self, template_name, **kwargs):
+        template_values = dict()
+        template_values["baidu"] = config.BAIDU
+        kwargs.update(template_values)
+        tornado.web.RequestHandler.render(self, template_name, **kwargs)
+
