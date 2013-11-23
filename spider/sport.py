@@ -14,10 +14,10 @@ class Sport(object):
 
     def __init__(self, username, password):
 
-        self.URL_BASE = "http://211.80.112.212/"
+        self.URL_BASE = "http://ty.gench.edu.cn/"
         self.url_login = self.URL_BASE + "Default.aspx"
 
-        self.url_login = "http://211.80.112.212/Default.aspx"
+        #self.url_login = "http://211.80.112.212/Default.aspx"
         self.url_score = "http://211.80.112.212/stScore.aspx?item=1"
 
         self.username = str(username)
